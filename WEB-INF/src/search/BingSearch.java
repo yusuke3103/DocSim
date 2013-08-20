@@ -20,7 +20,7 @@ public class BingSearch {
 	private static String url = "https://api.datamarket.azure.com/Bing/SearchWeb/v1/Web?";
 	private static String format = "json";
 	private static String keyword = "";
-	
+	private static String Market = "'ja-JP'";
 	public void run(){
 		
 		byte[] accountKeyBytes = Base64.encodeBase64((accountKey+":"+ accountKey).getBytes());
@@ -28,8 +28,11 @@ public class BingSearch {
 		
 		try{
 			String bingURL = url;
-			bingURL += "Query=" + URLEncoder.encode(keyword, "UTF-8");
+			bingURL += "Query=" + URLEncoder.encode(keyword,"utf-8");
 			bingURL += "&$format=" + format;
+			bingURL += "&Market="+ URLEncoder.encode(Market,"utf-8");
+			
+			System.out.println(bingURL);
 			
 			URL url = new URL(bingURL);
 			
@@ -42,14 +45,14 @@ public class BingSearch {
 			while((line = reader.readLine()) != null){
 				json+=line;
 			}
+			
 			System.out.println(json);
 			JsonFactory factry = new JsonFactory();
 			JsonParser parser = factry.createJsonParser(json);
-			int i = 0;
+			System.out.println("JSON解析開始");
 			while(parser.nextToken() != JsonToken.END_OBJECT){
+				
 				String name = parser.getCurrentName();
-				i++;
-				System.err.println("ループ中"+ i );
 				//System.err.println(name);
 				if(name != null){
 					if(name.equals("results")){
@@ -57,7 +60,6 @@ public class BingSearch {
 							while (parser.nextToken() != JsonToken.END_OBJECT){
 								parser.nextToken();
 								name = parser.getCurrentName();
-								System.err.println(name);
 								if(name.equals("Title")){
 									servlet.MainServlet.Title.add(parser.getText());
 								}else if(name.equals("Description")){
@@ -73,6 +75,11 @@ public class BingSearch {
 				}
 					parser.nextToken();
 			}
+			System.err.println("JSON解析終了");
+			
+			is.close();
+			reader.close();
+			parser.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}

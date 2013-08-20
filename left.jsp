@@ -1,3 +1,4 @@
+<%@page import="java.io.IOException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="flags.Access" %>
@@ -10,19 +11,21 @@
 <body>
 <%
 	boolean go = false;
-	long start = System.currentTimeMillis();
+	Access.setGoF();
+	//long start = System.currentTimeMillis();
 	while (go!=true){
-		System.out.println("ループ中");
 		go = Access.getGo();
+		try{
+			Thread.sleep(10);
+		}catch (InterruptedException e){}
+		//System.err.println(go);
 	}
-	long stop = System.currentTimeMillis();
-	long times = stop-start;
+	//long stop = System.currentTimeMillis();
+	//long times = (stop-start)/1000;
 	System.out.println("検索終了");
-%>
-	<a>検索時間:<%=times%>秒</a>
-<%
+
 	for (int i=0;i<MainServlet.Url.size();i++){
-%>	
+%>
 
 <font size="1">
 		<a href=<%=MainServlet.Url.get(i).toString() %> target=_brank><%=i+1 %>.<%=MainServlet.Title.get(i).toString() %></a>
