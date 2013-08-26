@@ -10,7 +10,8 @@ import sys
 #タイトルと本文の取得
 def getDocument(row):
     title = row[0]
-    content = row[1]
+    content = row[2]
+    print title,content
     return title,content
 
 #単語の出現頻度取得
@@ -31,7 +32,7 @@ def extractNouns(content):
     nouns = []#単語のリスト
     while node:
         if not re_word.findall(node.feature) and not node.surface.isspace():
-            print node.surface,":",node.feature
+            #print node.surface,":",node.feature
             nouns.append(node.surface)
         node = node.next
     return nouns
@@ -39,17 +40,22 @@ def extractNouns(content):
 ###メイン###
 argv = sys.argv
 dir = argv[1]
+apcount={}
+wordcounts={}
 
 csv_path = dir + "cache/cache.csv"
 data_path = dir + "cache/data.txt"
 clust_path = dir + "cache/clust.txt"
+
 
 print "==========="
 print "generatorDocVector.py"
 print "ディレクトリパス：" + dir
 print "==========="
 csv_file = open(csv_path)
+list = [line for line in file (csv_path)]
 line = csv.reader(csv_file,delimiter='\t')
+
 for row in line:
     print row
     

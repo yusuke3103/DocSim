@@ -1,5 +1,5 @@
 #! /usr/local/bin/python
-# -*- encoding:utf-8 -*-
+# coding:utf-8
 import MeCab
 import re
 import csv
@@ -8,40 +8,36 @@ import sys
 
 
 #タイトルと本文の取得
-def getDocument(row):
+def getDocument(doc):
     title = row[0]
-    content = row[2]
-    print title,content
+    content = row[1]
     return title,content
 
-#単語の出現頻度取得
-def getWordcount(content):
+#文書毎の単語を取得
+def getWordList(doc):
     wc = {}
-    words = extractNouns(content)
-    for word in words:
-    
-        wc.setdefault(word,0)
-        wc[word]+=1
-    return wc
+    words = extractNouns(doc)
+    return words
 
-# 形態素解析
-def extractNouns(content):
+#形態素解析
+def extractNouns(doc):
     tagger=MeCab.Tagger()#使う辞書の宣言
     node=tagger.parseToNode(content)#本文をnodeとして扱う
-    re_word = re.compile("助詞|接尾|BOS|EOS|記号|名詞,数|助動詞|動詞|形容詞|サ変接続|接続詞|副詞|接頭詞|非自立|　")#除外する品詞
+    re_word = re.compile("助詞|接尾|BOS|EOS|記号|名詞,数|助動詞|動詞|形容詞|サ変接続|接続詞|副詞|接頭詞|非自立| ")#除外する品詞
     nouns = []#単語のリスト
     while node:
         if not re_word.findall(node.feature) and not node.surface.isspace():
-            #print node.surface,":",node.feature
             nouns.append(node.surface)
         node = node.next
     return nouns
 
+
 ###メイン###
-argv = sys.argv
-dir = argv[1]
-apcount={}
-wordcounts={}
+#argv = sys.argv
+#dir = argv[1]
+dir = "/Users/yusuke/Dropbox/workspace/JavaEE/DocSim/"
+wordlist = {}
+docs = []
 
 csv_path = dir + "cache/cache.csv"
 data_path = dir + "cache/data.txt"
@@ -53,19 +49,25 @@ print "generatorDocVector.py"
 print "ディレクトリパス：" + dir
 print "==========="
 csv_file = open(csv_path)
-list = [line for line in file (csv_path)]
+#list = [line for line in file (csv_path)]
 line = csv.reader(csv_file,delimiter='\t')
-
 for row in line:
-    print row
-    
     title,content = getDocument(row)
-    wc=getWordcount(content)
-    wordcounts[title]=wc
-    for word,count in wc.items():
-        apcount.setdefault(word,0)
-        if count > 1:
-            apcount[word]+=1
+    wc = getWordList(content)
+    wordlist[title] = wc
+for title,words in wordlist.items():
+    docs.append(words)
+    
+collection = nltk.TextCollection(docs)
+terms = list(set(collection))
+print terms
+for doc in docs:
+    print "=============="
+    for term in terms:
+        print "%s\t%f" % (term,collection.tf_idf(term, doc))
+    print "=============="    
+
+'''        
 # 出現する単語の洗い出し
 wordlist=[]
 for w,bc in apcount.items():
@@ -84,3 +86,4 @@ for blog,wc in wordcounts.items():
         if word in wc: out.write('\t%d' % wc[word])
         else: out.write('\t0')
     out.write('\n')
+'''
