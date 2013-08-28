@@ -2,6 +2,7 @@ package servlet;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
 
 import de.l3s.boilerpipe.BoilerpipeProcessingException;
 import de.l3s.boilerpipe.extractors.CommonExtractors;
@@ -10,6 +11,7 @@ public class Boilerpip {
 	public void run(int i){
 		String text = null;
 		String StrUrl = MainServlet.Url.get(i);
+		
 		
 		
 		try{
