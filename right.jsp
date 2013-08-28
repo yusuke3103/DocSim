@@ -33,36 +33,27 @@
                         children: [
                         <%for (int x=0;x<clust0.size();x++){ 
                         	if(x+1!=clust0.size()){%>
-                        { label: '<%=clust0.get(x)+1%>', amount: 1,color:'#D95F02'},
+                        { label: '<%=clust0.get(x)%>', amount: 1,color:'#D95F02'},
                         <%}else if(x+1==clust0.size()){%>
-                        { label: '<%=clust0.get(x)+1%>', amount: 1,color:'#D95F02'}
+                        { label: '<%=clust0.get(x)%>', amount: 1,color:'#D95F02'}
                         <%}}%>
                     ] },
                     { label: '2nd', amount: <%=clust1.size()%>, color: '#dda0dd',
                         children: [
                         <%for (int x=0;x<clust1.size();x++){ 
                         	if(x+1!=clust1.size()){%>
-                        { label: '<%=clust1.get(x)+1%>', amount: 1,color:'#dda0dd'},
+                        { label: '<%=clust1.get(x)%>', amount: 1,color:'#dda0dd'},
                         <%}else if(x+1==clust1.size()){%>
-                        { label: '<%=clust1.get(x)+1%>', amount: 1,color:'#dda0dd'}
+                        { label: '<%=clust1.get(x)%>', amount: 1,color:'#dda0dd'}
                         <%}}%>
                     ] },
-                    { label: '3nd', amount: <%=clust2.size()%>, color: '#0000ff',
-                        children: [
-                        <%for (int x=0;x<clust2.size();x++){ 
-                        	if(x+1!=clust2.size()){%>
-                        { label: '<%=clust2.get(x)+1%>', amount: 1,color:'#0000ff'},
-                        <%}else if(x+1==clust2.size()){%>
-                        { label: '<%=clust2.get(x)+1%>', amount: 1,color:'#0000ff'}
-                        <%}}%>
-                    ] },
-                    { label: '4rd', amount: <%=clust3.size()%>, color: '#00ff00',
+                    { label: '3rd', amount: <%=clust3.size()%>, color: '#00ff00',
                         children: [
                         <%for (int x=0;x<clust3.size();x++){ 
                         	if(x+1!=clust3.size()){%>
-                        { label: '<%=clust3.get(x)+1%>', amount: 1,color:'#00ff00'},
+                        { label: '<%=clust3.get(x)%>', amount: 1,color:'#00ff00'},
                         <%}else if(x+1==clust1.size()){%>
-                        { label: '<%=clust3.get(x)+1%>', amount: 1,color:'#00ff00'}
+                        { label: '<%=clust3.get(x)%>', amount: 1,color:'#00ff00'}
                         <%}}%>
                     ]
                     }
@@ -85,3 +76,4 @@
 	</div>
 </body>
 </html>
+

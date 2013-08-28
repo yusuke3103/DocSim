@@ -62,7 +62,7 @@ public class MainServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String keyword = request.getParameter("Keyword");
 		System.out.println("キーワード=" + keyword);
-		
+/*		
 		System.err.println("BingSearch");
 		BingSearch Bs = new BingSearch();
 		Bs.setKeyword(keyword);
@@ -76,11 +76,10 @@ public class MainServlet extends HttpServlet {
 			bp.run(i);
 		}
 
-		
 		System.err.println("本文収集終了");
 		File file = new File(Save_Dir+"cache//cache.csv");
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-		for(int x=0;x<Content.size();x++){
+		for(int x=0;x<Title.size();x++){
 			pw.println(x+"\t"+Title.get(x)+"\t"+Content.get(x));
 		}
 		pw.close();
@@ -95,7 +94,7 @@ public class MainServlet extends HttpServlet {
 		}catch (InterruptedException e){
 			e.printStackTrace();
 		}
-
+*/
 		Cluster cluster = new Cluster();
 		cluster_data=cluster.getCluster(Save_Dir);
 		clust0 = cluster.getSort(0);
@@ -107,7 +106,6 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("clust1", clust1);
 		request.setAttribute("clust2", clust2);
 		request.setAttribute("clust3", clust3);
-
 		request.setAttribute("Size", cluster_data.size());
 		RequestDispatcher rds = request.getRequestDispatcher("/right.jsp");
 		rds.forward(request, response);
