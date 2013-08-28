@@ -62,7 +62,7 @@ public class MainServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String keyword = request.getParameter("Keyword");
 		System.out.println("キーワード=" + keyword);
-/*		
+		
 		System.err.println("BingSearch");
 		BingSearch Bs = new BingSearch();
 		Bs.setKeyword(keyword);
@@ -94,7 +94,7 @@ public class MainServlet extends HttpServlet {
 		}catch (InterruptedException e){
 			e.printStackTrace();
 		}
-*/
+
 		Cluster cluster = new Cluster();
 		cluster_data=cluster.getCluster(Save_Dir);
 		clust0 = cluster.getSort(0);

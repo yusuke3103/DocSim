@@ -47,7 +47,16 @@
                         { label: '<%=clust1.get(x)%>', amount: 1,color:'#dda0dd'}
                         <%}}%>
                     ] },
-                    { label: '3rd', amount: <%=clust3.size()%>, color: '#00ff00',
+                    { label: '3rd', amount: <%=clust2.size()%>, color: '#0000ff',
+                        children: [
+                        <%for (int x=0;x<clust2.size();x++){ 
+                        	if(x+1!=clust2.size()){%>
+                        { label: '<%=clust2.get(x)%>', amount: 1,color:'#0000ff'},
+                        <%}else if(x+1==clust2.size()){%>
+                        { label: '<%=clust2.get(x)%>', amount: 1,color:'#0000ff'}
+                        <%}}%>
+                    ] },
+                    { label: '4th', amount: <%=clust3.size()%>, color: '#00ff00',
                         children: [
                         <%for (int x=0;x<clust3.size();x++){ 
                         	if(x+1!=clust3.size()){%>
