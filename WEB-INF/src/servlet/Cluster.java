@@ -18,9 +18,9 @@ public class Cluster {
 			
 			String[] nextLine;
 			while((nextLine = reader.readNext()) != null){
-				int b = Integer.parseInt(nextLine[0]);
-				int a = Integer.parseInt(nextLine[1]);
-				cluster_result.put(b, a);
+				int a = Integer.parseInt(nextLine[0]);
+				int b = Integer.parseInt(nextLine[1]);
+				cluster_result.put(a, b);
 			//	System.out.println(nextLine[0] + " " + nextLine[1]);
 			}
 		}catch (IOException e){
@@ -28,6 +28,7 @@ public class Cluster {
 		}
 		return cluster_result;
 	}
+	
 	public ArrayList<Integer> getSort(int i) {
 		ArrayList<Integer> Sort = new ArrayList<>();
 		for (int x=0;x<cluster_result.size();x++){
