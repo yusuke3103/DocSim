@@ -15,7 +15,7 @@ function check(){
 		window.alert("キーワードが入力されていません");
 		return false;
 	}else{
-		parent.left.location.href="./left.jsp";
+		top.left.location.href="./left.jsp";
 		return true;
 	}
 }
@@ -23,11 +23,11 @@ function check(){
 <meta http-equiv="Contnt-Type" Content="text/html; charset=UTF-8">
 </head>
 <body>
-	<form action="MainServlet" target="right" method="post" name="setKeyword"
+	<form action="nowloading.jsp" target="right" method="post" name="setKeyword"
 		onsubmit="return check()">
 		<table>
 			<tr>
-				<td><input type="text" name=Keyword></td>
+				<td><input type="text" name=keyword></td>
 				<td><input type="submit" value="検索"></td>
 			</tr>
 		</table>

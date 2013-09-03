@@ -5,7 +5,6 @@
 	ArrayList<Integer> clust1 = (ArrayList)request.getAttribute("clust1");
 	ArrayList<Integer> clust2 = (ArrayList)request.getAttribute("clust2");
 	ArrayList<Integer> clust3 = (ArrayList)request.getAttribute("clust3");
-	System.out.println(clust0);
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +20,9 @@
 <script type="text/javascript" src="./BubbleTree/styles/cofog.js"></script>
 
 <script type="text/javascript">
-
+		function init(){
+			parent.left.location.href="./left2.html?";
+		}
         $(function() {
 
 
@@ -80,7 +81,7 @@
     </script>
 </head>
 <body>
-	<div class="bubbletree-wrapper">
+	<!-- <div class="bubbletree-wrapper">-->
 		<div class="bubbletree"></div>
 	</div>
 </body>

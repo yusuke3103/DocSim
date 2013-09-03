@@ -1365,7 +1365,6 @@ BubbleTree.Bubbles.Plain = function(node, bubblechart, origin, radius, angle, co
 	me.onclick = function(e) {
 		var me = this;
 		me.bc.onNodeClick(me.node);
-		
 		//if (me.node.children.length > 1) {
 			me.bc.navigateTo(me.node);
 		//}
@@ -1594,7 +1593,6 @@ BubbleTree.Bubbles.Donut = function(node, bubblechart, origin, radius, angle, co
 	 */
 	me.onclick = function(e) {
 		var me = this;
-
 		me.bc.navigateTo(me.node);
 		
 	};
@@ -2104,6 +2102,8 @@ BubbleTree.Bubbles.Icon = function(node, bubblechart, origin, radius, angle, col
 	me.onclick = function(e) {
 		var me = this;
 		me.bc.onNodeClick(me.node);
+		/**ここ！！！**/
+		alert(me.node.children.toString());
 		//if (me.node.children.length > 1) {
 			me.bc.navigateTo(me.node);
 		//}

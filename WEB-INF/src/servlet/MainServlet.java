@@ -79,7 +79,7 @@ public class MainServlet extends HttpServlet {
 		System.err.println("本文収集終了");
 		File file = new File(Save_Dir+"cache//cache.csv");
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-		for(int x=0;x<Title.size();x++){
+		for(int x=0;x<Content.size();x++){
 			pw.println(x+"\t"+Title.get(x)+"\t"+Content.get(x));
 		}
 		pw.close();
