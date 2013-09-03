@@ -15,7 +15,6 @@ function check(){
 		window.alert("キーワードが入力されていません");
 		return false;
 	}else{
-		top.left.location.href="./left.jsp";
 		return true;
 	}
 }

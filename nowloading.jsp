@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -43,9 +46,14 @@
 	
 	//The following code starts the animation
 	new imageLoader(cImageSrc, 'startAnimation()');
+	
+	function Search(){
+		parent.left.location.href="./left.jsp";
+		document.Search.submit();
+	}
 </script>
 </head>
-<body onLoad="document.Search.submit();">
+<body onLoad="Search()">
 <form name="Search" action="MainServlet" method="POST" target="right">
 	<input type="hidden" name=Keyword value=<%=request.getParameter("keyword") %>>
 </form>
