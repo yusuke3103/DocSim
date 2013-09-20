@@ -1,11 +1,10 @@
-#! /usr/local/bin/python
 # -*- encoding:utf-8 -*-
 import os
 from math import sqrt
-from PIL import Image,ImageDraw,ImageFont
+#from PIL import Image,ImageDraw,ImageFont
 import random
 import sys
-font = ImageFont.truetype('/Library/Fonts/Hiragino Sans GB W3.otf',19, encoding='unic')
+#font = ImageFont.truetype('/Library/Fonts/Hiragino Sans GB W3.otf',19, encoding='unic')
 
 
 
@@ -27,22 +26,18 @@ def readfile(filename):
 
 def pearson(v1,v2):# ピアソンによるスコアを算出
     #単純な合計
-    print "v1=",v1
-    print "v2=",v2
+
     sum1=sum(v1)
     sum2=sum(v2)
     
     #平方の合計
     sum1Sq=sum([pow(v,2) for v in v1])
     sum2Sq=sum([pow(v,2) for v in v2])
-    print sum1Sq,sum2Sq
-    # 積の合計
+     # 積の合計
     pSum=sum([v1[i]*v2[i] for i in range(len(v1))])
-    print pSum
     #ピアソンによるスコアを算出
     num=pSum-(sum1*sum2/len(v1))
     den=sqrt((sum1Sq-pow(sum1,2)/len(v1))*(sum2Sq-pow(sum2,2)/len(v1)))
-    print den
     if den==0: return 0
 
     return 1.0-num/den
@@ -114,8 +109,6 @@ def kcluster(rows,distance=pearson,k=4):
             row=rows[j]
             bestmatch=0
             for i in range(k):
-                print "cluster[i]=",clusters[i]
-                print "row=",row
                 d=distance(clusters[i],row)
                 if d<distance(clusters[bestmatch],row): bestmatch=i
             bestmatches[bestmatch].append(j)
@@ -135,7 +128,7 @@ def kcluster(rows,distance=pearson,k=4):
             clusters[i]=avgs
             
         return bestmatches
-
+'''
 def scaledown(data,distance=pearson,rate=0.01):
     n=len(data)
     #アイテムのすべての組の実際の距離
@@ -187,7 +180,7 @@ def draw2d(data,labels,jpeg='mds2d.jpg'):
         y=(data[i][1]+0.5)*1000
         draw.text((x,y),unicode(labels[i],'utf8'),(0,0,0),font=font)
     img.save(jpeg,'JPEG')
-
+'''
 
 def drawdendrogram(clust,labels,jpeg='clusters.jpg'):
     h=getheight(clust)*20
@@ -226,7 +219,7 @@ blognames,word,data=readfile(data_path)
 clust=hcluster(data)
 
 printclust(clust,labels=blognames)
-drawdendrogram(clust,blognames,jpeg='blogclust')
+#drawdendrogram(clust,blognames,jpeg='blogclust')
 
 kclust=kcluster(data,k=4)
 
@@ -238,5 +231,5 @@ for n in range(4):
         
         
 f.close()
-coords=scaledown(data)
-draw2d(coords,blognames,jpeg=jpg_dir)
+#coords=scaledown(data)
+#draw2d(coords,blognames,jpeg=jpg_dir)

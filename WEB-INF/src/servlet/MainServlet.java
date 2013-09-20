@@ -31,7 +31,7 @@ public class MainServlet extends HttpServlet {
 	public static ArrayList<String> Content;
 	private static HashMap<Integer, Integer> cluster_data;
 	private String Save_Dir;
-	private String Python = "/usr/local/bin/python";
+	private String Python = "/usr/bin/python";
 	private static HashMap<String,Integer> cluster;
 	private static ArrayList<Integer> clust0;
 	private static ArrayList<Integer> clust1;
@@ -88,7 +88,7 @@ public class MainServlet extends HttpServlet {
 		//String[] cmd1 = {Python,Save_Dir+"pysrc/generatorDocVector_tfidf.py",Save_Dir};
 		String[] cmd2 = {Python,Save_Dir+"pysrc/cluster.py",Save_Dir};
 		Command cmdRunTime = new Command();
-		try{
+		try{	
 			cmdRunTime.execCmd(cmd1);
 			cmdRunTime.execCmd(cmd2);
 		}catch (InterruptedException e){

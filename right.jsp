@@ -20,8 +20,8 @@
 <script type="text/javascript" src="./BubbleTree/styles/cofog.js"></script>
 
 <script type="text/javascript">
-		function init(){
-			parent.left.location.href="./left2.html?";
+		function filtering(){
+			parent.left.location.href="Filter";
 		}
         $(function() {
 
@@ -30,40 +30,40 @@
                 label: 'Center',
                 amount: <%=total_amount %>,
                 children: [
-                    { label: '1st', amount: <%=clust0.size()%>, color: '#D95F02',
+                    { label: '1st', amount: <%=clust0.size()%>, color: '#fff8dc',
                         children: [
                         <%for (int x=0;x<clust0.size();x++){ 
                         	if(x+1!=clust0.size()){%>
-                        { label: '<%=clust0.get(x)%>', amount: 1,color:'#D95F02'},
+                        { label: '<%=clust0.get(x)+1%>', amount: 1,color:'#fff8dc'},
                         <%}else if(x+1==clust0.size()){%>
-                        { label: '<%=clust0.get(x)%>', amount: 1,color:'#D95F02'}
+                        { label: '<%=clust0.get(x)+1%>', amount: 1,color:'#fff8dc'}
                         <%}}%>
                     ] },
                     { label: '2nd', amount: <%=clust1.size()%>, color: '#dda0dd',
                         children: [
                         <%for (int x=0;x<clust1.size();x++){ 
                         	if(x+1!=clust1.size()){%>
-                        { label: '<%=clust1.get(x)%>', amount: 1,color:'#dda0dd'},
+                        { label: '<%=clust1.get(x)+1%>', amount: 1,color:'#dda0dd'},
                         <%}else if(x+1==clust1.size()){%>
-                        { label: '<%=clust1.get(x)%>', amount: 1,color:'#dda0dd'}
+                        { label: '<%=clust1.get(x)+1%>', amount: 1,color:'#dda0dd'}
                         <%}}%>
                     ] },
-                    { label: '3rd', amount: <%=clust2.size()%>, color: '#0000ff',
+                    { label: '3rd', amount: <%=clust2.size()%>, color: '#f0f8ff',
                         children: [
                         <%for (int x=0;x<clust2.size();x++){ 
                         	if(x+1!=clust2.size()){%>
-                        { label: '<%=clust2.get(x)%>', amount: 1,color:'#0000ff'},
+                        { label: '<%=clust2.get(x)+1%>', amount: 1,color:'#f0f8ff'},
                         <%}else if(x+1==clust2.size()){%>
-                        { label: '<%=clust2.get(x)%>', amount: 1,color:'#0000ff'}
+                        { label: '<%=clust2.get(x)+1%>', amount: 1,color:'#f0f8ff'}
                         <%}}%>
                     ] },
-                    { label: '4th', amount: <%=clust3.size()%>, color: '#00ff00',
+                    { label: '4th', amount: <%=clust3.size()%>, color: '#90ee90',
                         children: [
                         <%for (int x=0;x<clust3.size();x++){ 
                         	if(x+1!=clust3.size()){%>
-                        { label: '<%=clust3.get(x)%>', amount: 1,color:'#00ff00'},
+                        { label: '<%=clust3.get(x)+1%>', amount: 1,color:'#90ee90'},
                         <%}else if(x+1==clust1.size()){%>
-                        { label: '<%=clust3.get(x)%>', amount: 1,color:'#00ff00'}
+                        { label: '<%=clust3.get(x)+1%>', amount: 1,color:'#90ee90'}
                         <%}}%>
                     ]
                     }
@@ -80,7 +80,9 @@
 
     </script>
 </head>
-<body>
+<body onLoad="filtering();">
+<form name=filter action="Filter" method="post" target="left">
+</form>
 	<!-- <div class="bubbletree-wrapper">-->
 		<div class="bubbletree"></div>
 	</div>
