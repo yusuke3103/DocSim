@@ -81,11 +81,11 @@
     </script>
 </head>
 <body onLoad="filtering();">
-<form name=filter action="Filter" method="post" target="left">
+<form name=filter action="Filter" method="get" target="left">
+<input id=co name=col type="hidden" value=#99999>
 </form>
 	<!-- <div class="bubbletree-wrapper">-->
 		<div class="bubbletree"></div>
 	</div>
 </body>
 </html>
-

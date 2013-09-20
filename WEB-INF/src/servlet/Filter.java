@@ -31,6 +31,8 @@ public class Filter extends HttpServlet {
 		Cluster cluster = new Cluster();
 		cluster_data=cluster.getCluster(Save_Dir);
 		System.out.println(cluster_data);
+		String color = request.getParameter("col");
+		request.setAttribute("postColor", color);
 		request.setAttribute("clust_data",cluster_data);
 		RequestDispatcher rds = request.getRequestDispatcher("/left2.jsp");
 		rds.forward(request, response);
