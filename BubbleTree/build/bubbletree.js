@@ -436,7 +436,6 @@ var BubbleTree = function(config, onHover, onUnHover) {
 			bubble, tr, i, twopi = Math.PI * 2,
 			getBubble = me.getBubble.bind(me), getRing = me.getRing.bind(me),
 			unify = me.unifyAngle;
-			
 		if (node !== null) {
 
 			// what do you we have to do here?
@@ -2103,7 +2102,6 @@ BubbleTree.Bubbles.Icon = function(node, bubblechart, origin, radius, angle, col
 		var me = this;
 		me.bc.onNodeClick(me.node);
 		/**ここ！！！**/
-		
 		//if (me.node.children.length > 1) {
 			me.bc.navigateTo(me.node);
 			var color = me.color.toString();

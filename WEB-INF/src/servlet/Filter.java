@@ -28,14 +28,14 @@ public class Filter extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Save_Dir = getServletContext().getRealPath("/");
-		Cluster cluster = new Cluster();
-		cluster_data=cluster.getCluster(Save_Dir);
-		System.out.println(cluster_data);
+ 		Cluster cluster = new Cluster();
+ 		cluster_data=cluster.getCluster(Save_Dir);
+ 		System.out.println(cluster_data);
 		String color = request.getParameter("col");
 		request.setAttribute("postColor", color);
-		request.setAttribute("clust_data",cluster_data);
-		RequestDispatcher rds = request.getRequestDispatcher("/left2.jsp");
-		rds.forward(request, response);
+ 		request.setAttribute("clust_data",cluster_data);
+ 		RequestDispatcher rds = request.getRequestDispatcher("/left2.jsp");
+ 		rds.forward(request, response);
 	}
 
 }

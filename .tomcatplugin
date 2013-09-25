@@ -5,7 +5,7 @@
     <reloadable>true</reloadable>
     <redirectLogger>false</redirectLogger>
     <updateXml>true</updateXml>
-    <warLocation>/Users/yusuke/Desktop/DocSim.war</warLocation>
+    <warLocation></warLocation>
     <extraInfo></extraInfo>
     <webPath>/DocSim</webPath>
 </tomcatProjectProperties>
