@@ -1,4 +1,2 @@
-/flags
-/search
-/servlet
-/sql
+/cluster_test.py
+/generatorDocVector_tfidf.py
