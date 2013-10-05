@@ -10,7 +10,7 @@ import sys
 def getDocument(row):
     title = row[0]
     content = row[2]
-    print title,content
+    #print title,content
     return title,content
 
 #単語の出現頻度取得
@@ -37,8 +37,9 @@ def extractNouns(content):
     return nouns
 
 ###メイン###
-argv = sys.argv
-dir = argv[1]
+#argv=sys.argv
+#dir = argv[1]
+dir = '/Users/yusuke/Dropbox/workspace/JavaEE/DocSim/'
 apcount={}
 wordcounts={}
 

@@ -1,10 +1,12 @@
 package servlet;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import sql.ConnectManager;
@@ -16,51 +18,53 @@ public class Boilerpip {
 	public void run(int i) {
 		String text = null;
 		String StrUrl = MainServlet.Url.get(i);
-
 		try {
-			StrUrl = URLDecoder.decode(StrUrl, "UTF-8");
-			String sql = "select * from result where Url = '" + StrUrl + "'";
-
-			Connection con = ConnectManager.getConnection();
+			StrUrl = URLDecoder.decode(StrUrl,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String sql = "select * from result where Url = '" + StrUrl + "'";
+		Connection con = ConnectManager.getConnection();
+		try {
 			Statement stm = con.createStatement();
 			ResultSet rst = stm.executeQuery(sql);
 			int count = 0;
-			while (rst.next()) {
+			while(rst.next()){
 				count++;
 			}
-			System.err.println(count);
-			if (count != 0) {
+			System.out.println(count);
+			if(count != 0){
 				rst.first();
 				MainServlet.Content.add(rst.getString("content"));
-			} else {
+			}else{
 				try {
 					URL url = new URL(StrUrl);
-					text = CommonExtractors.DEFAULT_EXTRACTOR.getText(url);
-					// text = CommonExtractors.ARTICLE_EXTRACTOR.getText(new
-					// URL(MainServlet.Url.get(i)));
-					if (text.length() == 0) {
-						text = MainServlet.Summary.get(i);
-					}
-
-					text = text.replaceAll("[\t\n\f\r]+", "");
-					text = text.replace("\"", "'");
-					MainServlet.Content.add(text);
-					String insert = "insert into result values(null,'" + StrUrl + "','" + text + "')";
-					int res = stm.executeUpdate(insert);
+					text = CommonExtractors.ARTICLE_EXTRACTOR.getText(url);
+					//text = CommonExtractors.DEFAULT_EXTRACTOR.getText(url);
 				} catch (MalformedURLException | BoilerpipeProcessingException e) {
-					e.printStackTrace();
+					text = MainServlet.Summary.get(i);
 				}
-
+				if (text.length() == 0){
+					text = MainServlet.Summary.get(i);
+				}
+				text = text.replaceAll("[\t\n\f\r]+", "");
+				text = text.replace("\"", "'");
+				String insert = "insert into result values(null,'" + StrUrl + "','" + text + "')";
+				int res = stm.executeUpdate(insert);
+				text = MainServlet.Summary.get(i);
 			}
-			// MainServlet.Content.add(rst.getString(2));
-			//
-			// }
-
-			con.close();
-			rst.close();
-			stm.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			text = MainServlet.Summary.get(i);
+			String insert = "insert into result values(null,'" + StrUrl + "','" + text + "')";
+			Statement stm;
+			try {
+				stm = con.createStatement();
+				int res = stm.executeUpdate(insert);
+			} catch (SQLException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+			}
 		}
+		
 	}
 }

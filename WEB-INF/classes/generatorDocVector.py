@@ -3,15 +3,16 @@ import csv
 import re
 import nltk
 import MeCab
+import sys
 
 
-'---本文取得---'
+#---本文取得---
 def getSiteData(row):
     title=row[0]
     content = row[2]
     return title,content
 
-'---出現回数取得---'
+#---出現回数取得---
 def getWordCount(content):
     wc={}
     words = extractNouns(content)
@@ -19,7 +20,8 @@ def getWordCount(content):
         wc.setdefault(word,0)
         wc[word]+=1
     return words,wc
-'---形態素解析---'
+
+#---形態素解析---
 def extractNouns(content):
     tagger=MeCab.Tagger()
     node=tagger.parseToNode(content)
@@ -32,7 +34,7 @@ def extractNouns(content):
         node = node.next 
     return nouns
 
-'---TF-IDF計算---' 
+#---TF-IDF計算---
 def tf_idf(docs):
     tokens=[]
     for doc in docs:
@@ -45,22 +47,31 @@ def tf_idf(docs):
         tf_idf[token_type]=A.tf_idf(token_type,tokens)
     return tf_idf
 
-'---メイン---'
+#---メイン---
 if __name__ == "__main__":
-    argv=sys.argv
-    dir = argv[1]
+    #argv=sys.argv
+    #dir = argv[1]
+    dir = '/Users/yusuke/Dropbox/workspace/JavaEE/DocSim/'
     csv_path = dir + "cache/cache.csv"
     data_path = dir + "cache/data.txt"
+
+    doclist=[]
+    wordcounts={}
+    apcount={}
+    wordlist=[]
+        
+    print "================"
+    print csv_path
+    print data_path
+    print "================"
     
     csvfile = open(csv_path)
     list = [line for line in file (csv_path)]
     line = csv.reader(csvfile,delimiter='\t')
     
-    doclist=[]
-    wordcounts={}
-    apcount={}
-    wordlist=[]
+
     for row in line:
+        print row
         title,content = getSiteData(row)
         docs,wc=getWordCount(content)
         doclist.append(docs)
@@ -73,7 +84,7 @@ if __name__ == "__main__":
     for w,bc in apcount.items():
         wordlist.append(w)
         
-    '---ファイル書き出す---'
+    #---ファイル書き出す---
     out=file(data_path,'w')
     out.write('Blog')
     for word in wordlist:
