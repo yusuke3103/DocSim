@@ -85,7 +85,7 @@
 <input id=co name=col type="hidden" value=#99999>
 </form>
 	<!-- <div class="bubbletree-wrapper">-->
-		<div class="bubbletree"></div>
+	<div class="bubbletree">
 	</div>
 </body>
 </html>

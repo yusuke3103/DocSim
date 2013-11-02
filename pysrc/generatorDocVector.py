@@ -49,9 +49,9 @@ def tf_idf(docs):
 
 #---メイン---
 if __name__ == "__main__":
-    #argv=sys.argv
-    #dir = argv[1]
-    dir = '/Users/yusuke/Dropbox/workspace/JavaEE/DocSim/'
+    argv=sys.argv
+    dir = argv[1]
+    #dir = '/Users/yusuke/Dropbox/workspace/JavaEE/DocSim/'
     csv_path = dir + "cache/cache.csv"
     data_path = dir + "cache/data.txt"
 

@@ -36,6 +36,7 @@ public class Boilerpip {
 			if(count != 0){
 				rst.first();
 				MainServlet.Content.add(rst.getString("content"));
+			rst.close();
 			}else{
 				try {
 					URL url = new URL(StrUrl);
@@ -53,6 +54,9 @@ public class Boilerpip {
 				int res = stm.executeUpdate(insert);
 				text = MainServlet.Summary.get(i);
 			}
+			stm.close();
+			con.close();
+			rst.close();
 		} catch (SQLException e) {
 			text = MainServlet.Summary.get(i);
 			String insert = "insert into result values(null,'" + StrUrl + "','" + text + "')";
@@ -60,11 +64,13 @@ public class Boilerpip {
 			try {
 				stm = con.createStatement();
 				int res = stm.executeUpdate(insert);
+				stm.close();
+				con.close();
 			} catch (SQLException e1) {
 				// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
 			}
+			
 		}
-		
 	}
 }
